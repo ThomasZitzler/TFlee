@@ -1,3 +1,7 @@
+# This fork
+Since there are no updates to the original version of this repository, I use the fork to incorporate my changes
+ * Extension method support
+
 # Flee (Supports .Net Core 2.0)
  Fast Lightweight Expression Evaluator.
  Convert this project vb.net to c#.
@@ -27,20 +31,8 @@ Flee is an expression parser and evaluator for the .NET framework. It allows you
 
 ### Installing Flee
 
-You should install [Flee with NuGet](https://www.nuget.org/packages/Flee):
-
-    Install-Package Flee
+This fork contains no nuget package, so you have to build your own version
     
-Or via the .NET Core command line interface:
-
-    dotnet add package Flee
-    
-## NuGet Packages
-
-| Name  | NuGet |
-| :---  | :---  |
-| [Flee](https://www.nuget.org/packages/Flee)                       | [![Flee](https://img.shields.io/badge/nuget-v1.2.2-blue.svg)](https://www.nuget.org/packages/Flee)                 
-
 ## More information
 * [Examples](https://github.com/mparlak/Flee/wiki/Examples) to learn how to create and evaluate expressions.
 
