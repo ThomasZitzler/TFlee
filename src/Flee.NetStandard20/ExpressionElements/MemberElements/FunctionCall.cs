@@ -52,7 +52,7 @@ namespace Flee.ExpressionElements.MemberElements
 
             if (methods.Count > 0)
             {
-                // More than one method exists with this name			
+                // More than one method exists with this name
                 this.BindToMethod(methods, MyPrevious, argTypes);
                 return;
             }
@@ -119,7 +119,7 @@ namespace Flee.ExpressionElements.MemberElements
 
             foreach (CustomMethodInfo cmi in arr)
             {
-                if (cmi.IsMatch(argTypes) == true)
+                if (cmi.IsMatch(argTypes, previous, MyContext) == true)
                 {
                     customInfos.Add(cmi);
                 }
@@ -145,10 +145,12 @@ namespace Flee.ExpressionElements.MemberElements
         /// <param name="argTypes"></param>
         private void ResolveOverloads(CustomMethodInfo[] infos, MemberElement previous, Type[] argTypes)
         {
+            var ownerType = previous?.ResultType ?? MyContext?.ExpressionOwner.GetType();
+
             // Compute a score for each candidate
             foreach (CustomMethodInfo cmi in infos)
             {
-                cmi.ComputeScore(argTypes);
+                cmi.ComputeScore(argTypes, ownerType);
             }
 
             // Sort array from best to worst matches
@@ -333,7 +335,14 @@ namespace Flee.ExpressionElements.MemberElements
             // Emit either a regular or paramArray call
             if (_myTargetMethodInfo.IsParamArray == false)
             {
-                this.EmitRegularFunctionInternal(parameters, elements, ilg, services);
+                if (_myTargetMethodInfo.IsExtensionMethod == false)
+                {
+                    this.EmitRegularFunctionInternal(parameters, elements, ilg, services);
+                }
+                else
+                {
+                    this.EmitExtensionFunctionInternal(parameters, elements, ilg, services);
+                }
             }
             else
             {
@@ -366,8 +375,35 @@ namespace Flee.ExpressionElements.MemberElements
         }
 
         /// <summary>
+        ///  Emit the arguments to a regular method call
+        /// </summary>
+        /// <param name="parameters"></param>
+        /// <param name="elements"></param>
+        /// <param name="ilg"></param>
+        /// <param name="services"></param>
+        private void EmitExtensionFunctionInternal(ParameterInfo[] parameters, ExpressionElement[] elements, FleeILGenerator ilg, IServiceProvider services)
+        {
+            Debug.Assert(parameters.Length == elements.Length + 1, "argument count mismatch");
+
+            if (MyPrevious == null)
+            {
+                EmitLoadOwner(ilg);
+            }
+
+            // Emit each element and any required conversions to the actual parameter type
+            for (int i = 0; i < parameters.Length - 1; i++)
+            {
+                var element = elements[i];
+                var pi = parameters[i + 1];
+                element.Emit(ilg, services);
+                bool success = ImplicitConverter.EmitImplicitConvert(element.ResultType, pi.ParameterType, ilg);
+                Debug.Assert(success, "conversion failed");
+            }
+        }
+
+        /// <summary>
         /// The method info we will be calling
-        /// </summary>	
+        /// </summary>
         private MethodInfo Method => _myTargetMethodInfo.Target;
 
         public override Type ResultType
@@ -390,5 +426,7 @@ namespace Flee.ExpressionElements.MemberElements
         protected override bool IsPublic => this.Method.IsPublic;
 
         public override bool IsStatic => this.Method.IsStatic;
+
+        public override bool IsExtensionMethod => this._myTargetMethodInfo.IsExtensionMethod;
     }
 }
