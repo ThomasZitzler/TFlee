@@ -51,7 +51,7 @@ long.minvalue * 2;true;true
 uint.maxvalue * uint.maxvalue;false;false
 uint.maxvalue * uint.maxvalue;true;true
 2000000000U * 2U;true;false
-ulong.maxvalue * ulong.maxvalue;false;false
+'ulong.maxvalue * ulong.maxvalue;false;false
 ulong.maxvalue * ulong.maxvalue;true;true
 9000000000000000000LU * 2LU;true;false
 ' Float..checked should do nothing

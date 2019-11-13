@@ -126,7 +126,7 @@ char;cast('^',char);^
 '	Reference types
 string;cast("abc", string);abc
 object;cast(Versiona, Version);System.Version
-object;cast(DelegateA, AppDomainInitializer);System.AppDomainInitializer
+'object;cast(DelegateA, AppDomainInitializer);System.AppDomainInitializer
 object;cast(StringArr, string[]);System.string[]
 ' Casts that are already implicitly valid
 double;cast(100,double);100.0
@@ -151,8 +151,8 @@ object;cast(intarr, Array);System.int32[]
 object;cast(arraya, object);System.string[]
 object;cast(stringarr, string[]);System.string[]
 object;cast(intarr, int[]);System.int32[]
-object;cast(DelegateA, Delegate);System.AppDomainInitializer
-object;cast(DelegateA, object);System.AppDomainInitializer
+'object;cast(DelegateA, Delegate);System.AppDomainInitializer
+'object;cast(DelegateA, object);System.AppDomainInitializer
 ' Casts to numeric types
 int32;cast(100.34, int);100
 byte;cast(100L,byte);100
@@ -170,13 +170,13 @@ object;cast(IComparableString, string);System.string
 '	class to interface
 object;cast(IComparableNull, Icloneable);System.void
 '	System.delegate to delegate type
-object;cast(delegateANull, AppDomainInitializer);System.void
+'object;cast(delegateANull, AppDomainInitializer);System.void
 '	System.delegate to implemented interface
-object;cast(delegateANull, ICloneable);System.void
+'object;cast(delegateANull, ICloneable);System.void
 '	System.delegate to concrete delegate
-object;cast(delegateANull,AppDomainInitializer);system.void
+'object;cast(delegateANull,AppDomainInitializer);system.void
 '	Concrete delegate to implemented interface
-object;cast(DelegateA, ICloneable);System.AppDomainInitializer
+'object;cast(DelegateA, ICloneable);System.AppDomainInitializer
 '	System.array to array type
 object;cast(ArrayA, string[]);System.string[]
 '	System.array to implemented interface

@@ -5,14 +5,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Flee.PublicTypes;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Flee.Test.ExpressionTests
 {
-    [TestFixture]
+    [TestClass]
     public class Benchmarks : Core
     {
-        [Test(Description = "Test that setting variables is fast")]
+        [TestMethod /*(Description = "Test that setting variables is fast")*/]
         public void TestFastVariables()
         {
             //Test should take 200ms or less
@@ -33,11 +33,10 @@ namespace Flee.Test.ExpressionTests
                 vars["a"] = 200;
                 vars["b"] = 300;
                 var result = e.Evaluate();
-                
             }
             sw.Stop();
             this.PrintSpeedMessage("Fast variables", iterations, sw);
-            Assert.Less(sw.ElapsedMilliseconds, expectedTime, "Test time above expected value");
+            Assert.IsTrue(sw.ElapsedMilliseconds < expectedTime, $"Test time {sw.ElapsedMilliseconds} above expected value {expectedTime}");
         }
 
         private void PrintSpeedMessage(string title, int iterations, Stopwatch sw)

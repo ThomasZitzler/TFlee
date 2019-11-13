@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using Flee.CalcEngine.PublicTypes;
 using Flee.PublicTypes;
-using NUnit.Framework;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Flee.Test.CalcEngineTests
 {
-    [TestFixture]
+    [TestClass]
     public class LongScriptTests
     {
         private SimpleCalcEngine _myEngine;
@@ -20,17 +20,18 @@ namespace Flee.Test.CalcEngineTests
             context.Imports.AddType(typeof(Math));
 			//            context.Imports.AddType(typeof(Math), "math");
 
-			//' add convert methods e.g. .ToInt64, .ToString, .ToDateTime...  https://msdn.microsoft.com/en-us/library/system.convert.aspx?f=255&MSPPError=-2147217396 
+			//' add convert methods e.g. .ToInt64, .ToString, .ToDateTime...  https://msdn.microsoft.com/en-us/library/system.convert.aspx?f=255&MSPPError=-2147217396
 			context.Imports.AddType(typeof(Convert));
 
 			engine.Context = context;
             _myEngine = engine;
         }
 
-        [Test]
+        [TestMethod]
         public void LongScriptWithManyFunctions()
         {
-			var script = System.IO.File.ReadAllText(@"test\Flee.Test\TestScripts\LongScriptWithManyFunctions.js");
+			var script = System.IO.File.ReadAllText(@"..\..\..\TestScripts\LongScriptWithManyFunctions.js");
+            script = script.Replace('\r', ' ').Replace('\n', ' ');
 			var expr = _myEngine.Context.CompileDynamic(script);
 			var result = expr.Evaluate();
 
@@ -38,10 +39,10 @@ namespace Flee.Test.CalcEngineTests
 		}
 
 
-		[Test]
+		[TestMethod]
 		public void FailingLongScriptWithManyFunctions()
 		{
-			var script = System.IO.File.ReadAllText(@"test\Flee.Test\TestScripts\FailingLongScriptWithManyFunctions.js");
+			var script = System.IO.File.ReadAllText(@"..\..\..\TestScripts\FailingLongScriptWithManyFunctions.js");
 			var expr = _myEngine.Context.CompileDynamic(script);
 			var result = expr.Evaluate();
 

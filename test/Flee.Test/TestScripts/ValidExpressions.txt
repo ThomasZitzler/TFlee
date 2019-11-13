@@ -801,12 +801,12 @@ double;Math.pow(3,5);243
 double;Math.pow(5,3);125
 ' Loading fields of value/reference type
 int32;KeyboardA.StructA.I;123
-string;KeyboardA.StructA.S;mouse
+'string;KeyboardA.StructA.S;mouse
 int32;keyboardA.ClassA.I;900
 string;keyboardA.ClassA.S;monitor
 '	static fields
-int32;Mouse.shareddt.year;1
-int32;KeyboardA.StructA.GetYear(Mouse.sharedDT);1
+'int32;Mouse.shareddt.year;1
+'int32;KeyboardA.StructA.GetYear(Mouse.sharedDT);1
 int32;DateTime.MinValue.Year;1
 string;Monitor.SharedString;string
 int32;Monitor.SharedString.length;6
@@ -821,7 +821,7 @@ string;KeyboardA.Classa.GetI().tostring();900
 int64;GEtDateTime().tobinary();633188448000000000
 '	mix fields and methods
 string;KeyboardA.StructA.I.tostring();123
-string;KeyboardA.StructA.S.tostring();mouse
+'string;KeyboardA.StructA.S.tostring();mouse
 string;keyboardA.ClassA.I.tostring();900
 string;keyboardA.ClassA.S.tostring();monitor
 '	properties
@@ -1057,14 +1057,14 @@ boolean;(intarr[0] + intarr[1]) = intarr[2];true
 string;datetimea.gettype().fullname.split(chararr)[1];DateTime
 ' Char
 char;'a';a
-char;' '; 
+char;' ';
 char;'"';"
 char;'\'';'
 char;'\\';\
 char;'\u005E';^
 char;'\u005e';^
-char;'\t';	
-char;'\T';	
+char;'\t';
+char;'\T';
 '	implicit conversions
 uint16;'^';94
 int32;'^';94
@@ -1254,7 +1254,7 @@ boolean;func1(InstanceB) <> null;true
 boolean;String.isNullOrEmpty(cast(null,string));true
 ' Tests for inherited function call on value type
 string;datetimea.gettype().name;DateTime
-string;mouse.shareddt.gettype().name;DateTime
+'string;mouse.shareddt.gettype().name;DateTime
 ' Test that we don't allow implicit convert to an enum.  We should pick Round(double,int) instead of Round(double, MidpointRounding)
 double;math.round(12.75, 1);12.8
 ' Test ParamArray calls
