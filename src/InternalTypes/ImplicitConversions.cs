@@ -549,9 +549,9 @@ namespace Flee.InternalTypes
         private static int GetInheritanceDistance(Type sourceType, Type destType)
         {
             int count = 0;
-            Type current = sourceType;
+            var current = sourceType;
 
-            while ((!object.ReferenceEquals(current, destType)))
+            while (current != null && (!object.ReferenceEquals(current, destType)))
             {
                 count += 1;
                 current = current.BaseType;

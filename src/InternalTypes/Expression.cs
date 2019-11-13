@@ -190,6 +190,7 @@ namespace Flee.InternalTypes
         {
             return _myEvaluator(_myOwner, _myContext, _myContext.Variables);
         }
+
         T IGenericExpression<T>.Evaluate()
         {
             return EvaluateGeneric();

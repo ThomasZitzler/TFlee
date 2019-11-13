@@ -31,7 +31,7 @@ namespace Flee.ExpressionElements.Literals.Integral
 
         public override void Emit(FleeILGenerator ilg, IServiceProvider services)
         {
-            EmitLoad(Convert.ToInt32(_myValue), ilg);
+            EmitLoad((Int32)_myValue, ilg);
         }
 
         public override System.Type ResultType => typeof(UInt32);

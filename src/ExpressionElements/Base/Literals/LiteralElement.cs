@@ -42,7 +42,7 @@ namespace Flee.ExpressionElements.Base.Literals
             }
             else if (value >= 0 & value <= UInt32.MaxValue)
             {
-                EmitLoad(Convert.ToInt32(value), ilg);
+                EmitLoad((Int32)value, ilg);
                 ilg.Emit(OpCodes.Conv_U8);
             }
             else

@@ -96,7 +96,7 @@ namespace Flee.ExpressionElements.Base
 
         protected static void EmitMethodCall(Type resultType, bool nextRequiresAddress, MethodInfo mi, FleeILGenerator ilg)
         {
-            if (mi.GetType().IsValueType == false)
+            if (mi.ReflectedType?.IsValueType == false)
             {
                 EmitReferenceTypeMethodCall(mi, ilg);
             }
@@ -301,11 +301,11 @@ namespace Flee.ExpressionElements.Base
             {
                 // We are not the first element; find all members with our name on the type of the previous member
                 var foundMembers =  MyPrevious.TargetType.FindMembers(targets, BindFlags, MyOptions.MemberFilter, MyName);
-                var importedMembers = MyContext.Imports.RootImport.FindMembers(MyName, targets); 
+                var importedMembers = MyContext.Imports.RootImport.FindMembers(MyName, targets);
 
                 if (foundMembers.Length == 0)
                 {
-                    // if no members are available check static extension methods in the context 
+                    // if no members are available check static extension methods in the context
                     return importedMembers;
                 }
 
@@ -326,10 +326,10 @@ namespace Flee.ExpressionElements.Base
 
             // Keep only the accessible members
             members = this.GetAccessibleMembers(members);
-            
+
             // Also search imports
             var importedMembers = MyContext.Imports.RootImport.FindMembers(name, memberType);
-            
+
             // if no members, just return imports
             if (members.Length == 0)
             {
