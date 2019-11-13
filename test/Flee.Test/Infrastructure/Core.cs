@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using System.IO;
 using System.Reflection;
 using System.ComponentModel;
-using System.Linq;
 using System.Threading;
 using System.Xml.XPath;
 using Flee.PublicTypes;
@@ -13,7 +11,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace Flee.Test.Infrastructure
 {
 
-public abstract class ExpressionTests
+    public abstract class ExpressionTests
 {
     private const string COMMENT_CHAR = "\'";
     private const char SEPARATOR_CHAR = ';';

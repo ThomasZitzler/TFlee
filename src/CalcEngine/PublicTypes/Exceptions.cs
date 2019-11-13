@@ -1,8 +1,5 @@
 ﻿
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using Flee.PublicTypes;
 
 namespace Flee.CalcEngine.PublicTypes

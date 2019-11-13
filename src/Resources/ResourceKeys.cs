@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
-
-namespace Flee.Resources
+﻿namespace Flee.Resources
 {
     /// <summary>
     /// Resource keys for compile error messages

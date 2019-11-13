@@ -1,9 +1,6 @@
 ﻿
 using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Data;
-using System.Diagnostics;
 using Flee.Parsing;
 using Flee.Parsing.grammatica_1._5.alpha2.PerCederberg.Grammatica.Runtime;
 using Flee.PublicTypes;

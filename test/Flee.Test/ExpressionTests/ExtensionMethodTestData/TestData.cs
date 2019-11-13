@@ -1,7 +1,5 @@
 ﻿namespace Flee.OtherTests.ExtensionMethodTestData
 {
-    using Microsoft.Win32.SafeHandles;
-
     internal class TestData
     {
         public string Id { get; set; }

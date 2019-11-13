@@ -1,16 +1,11 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq.Expressions;
 using Flee.CalcEngine.InternalTypes;
 using Flee.CalcEngine.PublicTypes;
 using Flee.ExpressionElements.Base;
 using Flee.InternalTypes;
 using Flee.Parsing;
 using Flee.Parsing.grammatica_1._5.alpha2.PerCederberg.Grammatica.Runtime;
-using Flee.PublicTypes;
 using Flee.Resources;
 
 namespace Flee.PublicTypes
