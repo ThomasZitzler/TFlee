@@ -5,6 +5,9 @@ using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Reflection.Emit;
 using System.Reflection;
+#if !NETSTANDARD
+using System.Linq.Expressions;
+#endif
 using Flee.ExpressionElements;
 using Flee.ExpressionElements.Base;
 using Flee.PublicTypes;
@@ -124,6 +127,29 @@ namespace Flee.InternalTypes
             dest.AddService(typeof(ExpressionInfo), _myInfo);
         }
 
+#if !NETSTANDARD
+        private static void EmitToAssembly(ExpressionElement rootElement, IServiceContainer services)
+        {
+            AssemblyName assemblyName = new AssemblyName(EmitAssemblyName);
+
+            string assemblyFileName = string.Format("{0}.dll", EmitAssemblyName);
+
+            AssemblyBuilder assemblyBuilder = System.AppDomain.CurrentDomain.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Save);
+            ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule(assemblyFileName, assemblyFileName);
+
+            MethodBuilder mb = moduleBuilder.DefineGlobalMethod("Evaluate", MethodAttributes.Public | MethodAttributes.Static, typeof(T), new Type[] {
+            typeof(object),
+            typeof(ExpressionContext),
+            typeof(VariableCollection)
+        });
+            FleeILGenerator ilg = new FleeILGenerator(mb.GetILGenerator());
+
+            rootElement.Emit(ilg, services);
+
+            moduleBuilder.CreateGlobalFunctions();
+            assemblyBuilder.Save(assemblyFileName);
+        }
+#else
         private static void EmitToAssembly(ExpressionElement rootElement, IServiceContainer services)
         {
             AssemblyName assemblyName = new AssemblyName(EmitAssemblyName);
@@ -143,6 +169,7 @@ namespace Flee.InternalTypes
             //assemblyBuilder.Save(assemblyFileName);
             assemblyBuilder.CreateInstance(assemblyFileName);
         }
+#endif
 
         private void ValidateOwner(object owner)
         {

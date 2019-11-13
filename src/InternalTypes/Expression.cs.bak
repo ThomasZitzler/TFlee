@@ -5,7 +5,9 @@ using System.ComponentModel.Design;
 using System.Diagnostics;
 using System.Reflection.Emit;
 using System.Reflection;
+#if !NETSTANDARD
 using System.Linq.Expressions;
+#endif
 using Flee.ExpressionElements;
 using Flee.ExpressionElements.Base;
 using Flee.PublicTypes;
