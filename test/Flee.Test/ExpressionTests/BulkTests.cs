@@ -40,13 +40,21 @@ namespace Flee.Test.ExpressionTests
         e.Result = 100;
     }
 
+#if NETFRAMEWORK
     [TestMethod]
     public void TestInvalidExpressions()
     {
         this.ProcessScriptTests("InvalidExpressions.txt", DoTestInvalidExpressions);
     }
-
+#else
     [TestMethod]
+    public void TestInvalidExpressionsNetCore()
+    {
+        this.ProcessScriptTests("InvalidExpressions.netcore.txt", DoTestInvalidExpressions);
+    }
+#endif
+
+        [TestMethod]
     public void TestValidCasts()
     {
         MyCurrentContext = MyValidCastsContext;
@@ -104,7 +112,7 @@ namespace Flee.Test.ExpressionTests
             e.Evaluate();
             Assert.IsFalse(shouldOverflow, $"{expression} should overflow");
         }
-        catch (OverflowException ex)
+        catch (OverflowException)
         {
             Assert.IsTrue(shouldOverflow, $"{expression} should not overflow");
         }

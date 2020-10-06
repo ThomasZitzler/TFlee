@@ -19,6 +19,7 @@ using Flee.PublicTypes;
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable FieldCanBeMadeReadOnly.Global
 // ReSharper disable InconsistentNaming
+#pragma warning disable 649
 #pragma warning disable 414
 #pragma warning disable 169
 

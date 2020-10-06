@@ -6,7 +6,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\src\Flee.csproj" />
+    <ProjectReference Include="..\..\src\FleeExt.csproj" />
   </ItemGroup>
 
 </Project>

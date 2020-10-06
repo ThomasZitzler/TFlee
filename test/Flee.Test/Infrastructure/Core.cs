@@ -131,7 +131,7 @@ namespace Flee.Test.Infrastructure
             this.CreateDynamicExpression(expression);
             Assert.Fail();
         }
-        catch (ExpressionCompileException ex)
+        catch (ExpressionCompileException)
         {
         }
     }
@@ -141,12 +141,12 @@ namespace Flee.Test.Infrastructure
         try
         {
             this.CreateDynamicExpression(expression, context);
-            Assert.Fail("Compile exception expected");
+            Assert.Fail($"Compile exception expected for {expression}");
         }
         catch (ExpressionCompileException ex)
         {
             if (expectedReason != null)
-                Assert.AreEqual(expectedReason, ex.Reason, string.Format("Expected reason '{0}' but got '{1}'", expectedReason, ex.Reason));
+                Assert.AreEqual(expectedReason, ex.Reason, $"Expected reason '{expectedReason}' but got '{ex.Reason}'");
         }
     }
 
@@ -238,7 +238,7 @@ namespace Flee.Test.Infrastructure
             var arr = line.Split(SEPARATOR_CHAR);
             processor(arr);
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             this.WriteMessage("Failed line: {0}", line);
             throw;

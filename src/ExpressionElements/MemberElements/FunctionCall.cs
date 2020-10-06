@@ -357,15 +357,20 @@ namespace Flee.ExpressionElements.MemberElements
         /// <param name="elements"></param>
         /// <param name="ilg"></param>
         /// <param name="services"></param>
-        private void EmitRegularFunctionInternal(ParameterInfo[] parameters, ExpressionElement[] elements, FleeILGenerator ilg, IServiceProvider services)
+        private void EmitExtensionFunctionInternal(ParameterInfo[] parameters, ExpressionElement[] elements, FleeILGenerator ilg, IServiceProvider services)
         {
-            Debug.Assert(parameters.Length == elements.Length, "argument count mismatch");
+            Debug.Assert(parameters.Length == elements.Length + 1, "argument count mismatch");
+
+            if (MyPrevious == null)
+            {
+                this.EmitLoadOwner(ilg);
+            }
 
             // Emit each element and any required conversions to the actual parameter type
-            for (int i = 0; i <= parameters.Length - 1; i++)
+            for (int i = 0; i < parameters.Length - 1; i++)
             {
-                ExpressionElement element = elements[i];
-                ParameterInfo pi = parameters[i];
+                var element = elements[i];
+                var pi = parameters[i + 1];
                 element.Emit(ilg, services);
                 bool success = ImplicitConverter.EmitImplicitConvert(element.ResultType, pi.ParameterType, ilg);
                 Debug.Assert(success, "conversion failed");
@@ -379,20 +384,15 @@ namespace Flee.ExpressionElements.MemberElements
         /// <param name="elements"></param>
         /// <param name="ilg"></param>
         /// <param name="services"></param>
-        private void EmitExtensionFunctionInternal(ParameterInfo[] parameters, ExpressionElement[] elements, FleeILGenerator ilg, IServiceProvider services)
+        private void EmitRegularFunctionInternal(ParameterInfo[] parameters, ExpressionElement[] elements, FleeILGenerator ilg, IServiceProvider services)
         {
-            Debug.Assert(parameters.Length == elements.Length + 1, "argument count mismatch");
-
-            if (MyPrevious == null)
-            {
-                EmitLoadOwner(ilg);
-            }
+            Debug.Assert(parameters.Length == elements.Length, "argument count mismatch");
 
             // Emit each element and any required conversions to the actual parameter type
-            for (int i = 0; i < parameters.Length - 1; i++)
+            for (int i = 0; i <= parameters.Length - 1; i++)
             {
-                var element = elements[i];
-                var pi = parameters[i + 1];
+                ExpressionElement element = elements[i];
+                ParameterInfo pi = parameters[i];
                 element.Emit(ilg, services);
                 bool success = ImplicitConverter.EmitImplicitConvert(element.ResultType, pi.ParameterType, ilg);
                 Debug.Assert(success, "conversion failed");

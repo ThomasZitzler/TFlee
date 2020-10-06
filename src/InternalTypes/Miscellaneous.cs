@@ -398,21 +398,6 @@ namespace Flee.InternalTypes
             return true;
         }
 
-        private static bool AreValidArgumentsForParameters(Type[] argTypes, ParameterInfo[] parameters)
-        {
-            Debug.Assert(argTypes.Length == parameters.Length);
-            // Match if every given argument is implicitly convertible to the method's corresponding parameter
-            for (int i = 0; i <= argTypes.Length - 1; i++)
-            {
-                if (ImplicitConverter.EmitImplicitConvert(argTypes[i], parameters[i].ParameterType, null) == false)
-                {
-                    return false;
-                }
-            }
-
-            return true;
-        }
-
         private static bool AreValidExtensionMethodArgumentsForParameters(Type[] argTypes, ParameterInfo[] parameters,
             MemberElement previous, ExpressionContext context)
         {
@@ -441,6 +426,21 @@ namespace Flee.InternalTypes
             for (int i = 0; i < argTypes.Length; i++)
             {
                 if (ImplicitConverter.EmitImplicitConvert(argTypes[i], parameters[i + 1].ParameterType, null) == false)
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private static bool AreValidArgumentsForParameters(Type[] argTypes, ParameterInfo[] parameters)
+        {
+            Debug.Assert(argTypes.Length == parameters.Length);
+            // Match if every given argument is implicitly convertible to the method's corresponding parameter
+            for (int i = 0; i <= argTypes.Length - 1; i++)
+            {
+                if (ImplicitConverter.EmitImplicitConvert(argTypes[i], parameters[i].ParameterType, null) == false)
                 {
                     return false;
                 }

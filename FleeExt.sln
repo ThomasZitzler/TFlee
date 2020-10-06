@@ -7,11 +7,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{B3847C6A-A38
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{FE73F713-B16C-4252-8D4F-291961822887}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Flee.Test", "test\Flee.Test\Flee.Test.csproj", "{55EA6F5A-3C4D-431F-A576-85F44B513FD3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleeExt.Test", "test\Flee.Test\FleeExt.Test.csproj", "{55EA6F5A-3C4D-431F-A576-85F44B513FD3}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flee.Console", "test\Flee.Console\Flee.Console.csproj", "{E813C04F-7C8F-4033-9502-AC3D80158117}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleeExt.Console", "test\Flee.Console\FleeExt.Console.csproj", "{E813C04F-7C8F-4033-9502-AC3D80158117}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Flee", "src\Flee.csproj", "{EE9432D8-C7A7-4127-9592-F9A5C8AE4AA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FleeExt", "src\FleeExt.csproj", "{EE9432D8-C7A7-4127-9592-F9A5C8AE4AA5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
