@@ -248,7 +248,7 @@ namespace Flee.Test.Infrastructure
     protected System.IO.Stream GetScriptFile(string fileName)
     {
         var a = Assembly.GetExecutingAssembly();
-        return a.GetManifestResourceStream(/*this.GetType(),*/ "Flee.Test.TestScripts." + fileName);
+        return a.GetManifestResourceStream(/*this.GetType(),*/ a.GetName().Name + ".TestScripts." + fileName);
     }
 
     protected string GetIndividualTest(string testName)

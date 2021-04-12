@@ -300,7 +300,18 @@ namespace Flee.ExpressionElements.Base
             else
             {
                 // We are not the first element; find all members with our name on the type of the previous member
-                var foundMembers =  MyPrevious.TargetType.FindMembers(targets, BindFlags, MyOptions.MemberFilter, MyName);
+                var foundMembers = MyPrevious.TargetType.FindMembers(targets, BindFlags, MyOptions.MemberFilter, MyName);
+
+                // in case the target type is an interface and implements other interfaces we have to search there as well
+                if (foundMembers.Length == 0 && MyPrevious.TargetType.IsInterface)
+                {
+                    foundMembers = MyPrevious.TargetType.GetInterfaces().SelectMany(x => x.FindMembers(
+                        targets,
+                        BindFlags,
+                        MyOptions.MemberFilter,
+                        MyName)).ToArray();
+                }
+
                 var importedMembers = MyContext.Imports.RootImport.FindMembers(MyName, targets);
 
                 if (foundMembers.Length == 0)

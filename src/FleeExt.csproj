@@ -5,6 +5,11 @@
     <RootNamespace>Flee</RootNamespace>
     <SignAssembly>false</SignAssembly>
     <DelaySign>false</DelaySign>
+    <Version>1.2.2</Version>
+    <Authors>Muhammet Parlak, Thomas Zitzler</Authors>
+    <Company>-</Company>
+    <Description>Flee - Fast Lightweight Expression Evaluator, forked version</Description>
+    <PackageProjectUrl>https://github.com/ThomasZitzler/FleeExt</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -12,7 +17,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="flee.pfx" />
     <None Remove="Resources\DocComments.xml" />
   </ItemGroup>
 
