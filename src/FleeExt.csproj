@@ -5,7 +5,7 @@
     <RootNamespace>Flee</RootNamespace>
     <SignAssembly>false</SignAssembly>
     <DelaySign>false</DelaySign>
-    <Version>1.2.2.1</Version>
+    <Version>1.2.2.2</Version>
     <Authors>Muhammet Parlak, Thomas Zitzler</Authors>
     <Company>-</Company>
     <Description>Flee - Fast Lightweight Expression Evaluator</Description>
@@ -17,12 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Remove="flee.pfx" />
     <None Remove="Resources\DocComments.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Include="Resources\DocComments.xml" />
   </ItemGroup>
 
   <ItemGroup Condition=" '$(TargetFramework)' == 'netstandard2.0' ">
