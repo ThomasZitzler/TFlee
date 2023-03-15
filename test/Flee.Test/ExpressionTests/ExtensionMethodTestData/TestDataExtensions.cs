@@ -1,4 +1,6 @@
-﻿namespace Flee.OtherTests.ExtensionMethodTestData
+﻿using System.Globalization;
+
+namespace Flee.OtherTests.ExtensionMethodTestData
 {
     internal static class TestDataExtensions
     {
@@ -40,6 +42,20 @@
         public static string SayHello(this SubTestData data, bool friendly)
         {
             return "Hello as well, " + (friendly ? "dear " : string.Empty) + data.Id;
+        }
+
+        public static string ConvertDouble(this string value, string unit) => value + unit;
+
+        public static string ConvertDouble(this double value, string unit) => value.ToString(CultureInfo.InvariantCulture)  + unit;
+
+        public static string ConvertDouble(this double? value, string unit)
+        {
+            if (!value.HasValue)
+            {
+                return string.Empty;
+            }
+
+            return value.Value.ToString(CultureInfo.InvariantCulture) ?? " " + unit;
         }
     }
 }
