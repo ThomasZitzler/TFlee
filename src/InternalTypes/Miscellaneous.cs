@@ -198,7 +198,7 @@ namespace Flee.InternalTypes
             }
             else if (this.IsExtensionMethod)
             {
-                _myScore = this.ComputeScoreExtensionMethodInternal(@params, argTypes);
+                _myScore = this.ComputeScoreExtensionMethodInternal(@params, ownerType, argTypes);
             }
             else
             {
@@ -224,14 +224,19 @@ namespace Flee.InternalTypes
         /// Compute a score showing how close our method matches the given argument types (for extension methods)
         /// </summary>
         /// <param name="parameters"></param>
+        /// <param name="ownerType"></param>
         /// <param name="argTypes"></param>
         /// <returns></returns>
-        private float ComputeScoreExtensionMethodInternal(ParameterInfo[] parameters, Type[] argTypes)
+        private float ComputeScoreExtensionMethodInternal(ParameterInfo[] parameters, Type ownerType, Type[] argTypes)
         {
             Debug.Assert(parameters.Length == argTypes.Length + 1);
 
-            // Our score is the average of the scores of each parameter.  The lower the score, the better the match.
             float sum = 0;
+
+            // Consider the implicit conversion from the owner type to the first parameter type
+            sum += ImplicitConverter.GetImplicitConvertScore(ownerType, parameters[0].ParameterType);
+
+            // Our score is the average of the scores of each parameter.  The lower the score, the better the match.
             for (int i = 0; i < argTypes.Length; i++)
             {
                 sum += ImplicitConverter.GetImplicitConvertScore(argTypes[i], parameters[i + 1].ParameterType);

@@ -419,7 +419,7 @@ namespace Flee.ExpressionElements.MemberElements
             }
         }
 
-        protected override bool RequiresAddress => !IsGetTypeMethod(this.Method);
+        protected override bool RequiresAddress => !IsExtensionMethod && !IsGetTypeMethod(this.Method);
 
         protected override bool IsPublic => this.Method.IsPublic;
 

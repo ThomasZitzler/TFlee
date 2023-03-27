@@ -10,6 +10,8 @@
 
         public SubTestData Sub => new SubTestData { Id = "Sub" + this.Id };
 
+        public string VarCode { get; internal set; }
+
         public string SayHello(int times)
         {
             string result = string.Empty;

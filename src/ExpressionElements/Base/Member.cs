@@ -105,7 +105,7 @@ namespace Flee.ExpressionElements.Base
                 EmitValueTypeMethodCall(mi, ilg);
             }
 
-            if (resultType.IsValueType & nextRequiresAddress)
+            if (resultType.IsValueType && nextRequiresAddress)
             {
                 EmitValueTypeLoadAddress(ilg, resultType);
             }
