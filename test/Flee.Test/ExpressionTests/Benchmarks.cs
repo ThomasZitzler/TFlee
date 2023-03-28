@@ -36,7 +36,7 @@ namespace Flee.Test.ExpressionTests
 
         private void PrintSpeedMessage(string title, int iterations, Stopwatch sw)
         {
-            this.WriteMessage("{0}: {1:n0} iterations in {2:n2}ms = {3:n2} iterations/sec", title, iterations, sw.ElapsedMilliseconds, iterations / (sw.ElapsedMilliseconds / 10));
+            this.WriteMessage("{0}: {1:n0} iterations in {2:n2}ms = {3:n2} iterations/sec", title, iterations, sw.ElapsedMilliseconds, iterations / (sw.ElapsedMilliseconds + 1 / 10));
         }
     }
 }

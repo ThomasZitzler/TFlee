@@ -73,9 +73,23 @@
             Assert.AreEqual("Hello as well, SubWorld!!!", result);
         }
 
+        [TestMethod]
+        public void TestExtensionMethodCallOnPropertyWithNullableArgumentsOnOverload() {
+            var result = GetExpressionContext().CompileDynamic("DoubleValue.ConvertDouble(VarCode)").Evaluate();
+            Assert.AreEqual("2abc", result);
+        }
+
+        [TestMethod]
+        public void TestExtensionMethodCallOnPropertyWithNullableArgumentsOnOverload2() {
+            var compilation = GetExpressionContext().CompileDynamic("NullableDoubleValue.ConvertDouble(VarCode)");
+
+            var result2 = compilation.Evaluate();
+            Assert.AreEqual("3abc", result2);
+        }
+
         private static ExpressionContext GetExpressionContext()
         {
-            var expressionOwner = new TestData { Id = "World" };
+            var expressionOwner = new TestData { Id = "World", DoubleValue = 2.0, NullableDoubleValue = 3.0, VarCode = "abc" };
             var context = new ExpressionContext(expressionOwner);
             context.Imports.AddType(typeof(TestDataExtensions));
             return context;

@@ -4,10 +4,13 @@
     {
         public string Id { get; set; }
 
-        public SubTestData Sub
-        {
-            get { return new SubTestData { Id = "Sub" + this.Id }; }
-        }
+        public double DoubleValue { get; set; }
+
+        public double? NullableDoubleValue { get; set; }
+
+        public SubTestData Sub => new SubTestData { Id = "Sub" + this.Id };
+
+        public string VarCode { get; internal set; }
 
         public string SayHello(int times)
         {
